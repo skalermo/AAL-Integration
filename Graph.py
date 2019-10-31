@@ -22,7 +22,20 @@ class Graph:
             self.adjDict[neighbor].remove(v)
         del self.adjDict[v]
 
-    def addEdge(self, v, u):
+    def addEdge(self, *args):
+        """Add edge represented as a tuple or 2 variables
+        :param args There may be 1 (tuple) or 2 arguments"""
+
+        if len(args) == 1 and isinstance(args[0], tuple):
+            edge = args[0]
+            self.addEdge(edge[0], edge[1])
+            return
+        elif len(args) != 2:
+            return
+
+        u = args[0]
+        v = args[1]
+
         if u == v:
             return
 
@@ -36,6 +49,13 @@ class Graph:
             self.adjDict[u].add(v)
 
         # self.edgeCount += 1
+
+    def addEdges(self, edges):
+        for edge in edges:
+            self.addEdge(edge)
+        # for edge in edges:
+        #     if len(edge) == 2:
+        #         self.addEdge(edge[0], edge[1])
 
     def removeEdge(self, v, u):
         if u == v or \
