@@ -1,7 +1,10 @@
-from Graph import Graph
-from Algorithms import bruteForce
-import sys
 import argparse
+import sys
+
+
+from GraphGen import genEdges
+from Algorithms import bruteForce
+from Parser import parseInput
 
 
 if __name__ == '__main__':
@@ -26,11 +29,8 @@ if __name__ == '__main__':
 
     # Handle m1 scenario
     if args['command'] == 'm1':
-        g = Graph()
-        lines = sys.stdin.readlines()
-        for line in lines:
-            g.addEdge(tuple(line.split()))
-        print(bruteForce(g))
+        graph = parseInput(sys.stdin.readlines())
+        print(bruteForce(graph))
 
     # Handle m2 scenario
     elif args['command'] == 'm2':

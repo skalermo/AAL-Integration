@@ -3,7 +3,7 @@ class Graph:
 
     def __init__(self):
         self.adjDict = {}
-        # self.edgeCount = 0
+        self.edgeCount = 0
 
     def __str__(self):
         output = ''
@@ -15,47 +15,40 @@ class Graph:
         if v not in self.adjDict:
             self.adjDict[v] = set()
 
+    def addVertices(self, vertices):
+        for v in vertices:
+            self.addVertex(v)
+
     def removeVertex(self, v):
         if v not in self.adjDict:
             return
+
+        self.edgeCount -= len(self.adjDict[v])
         for neighbor in self.adjDict[v]:
             self.adjDict[neighbor].remove(v)
         del self.adjDict[v]
 
-    def addEdge(self, *args):
-        """Add edge represented as a tuple or 2 variables
-        :param args There may be 1 (tuple) or 2 arguments"""
+    def addEdge(self, u, v):
+        """Add edge between u and v vertices
+        Do nothing if vertices are the same
+        or if at least one of them doesn't belong to the graph"""
 
-        if len(args) == 1 and isinstance(args[0], tuple):
-            edge = args[0]
-            self.addEdge(edge[0], edge[1])
-            return
-        elif len(args) != 2:
-            return
-
-        u = args[0]
-        v = args[1]
-
-        if u == v:
+        if u == v or \
+                v not in self.adjDict or\
+                u not in self.adjDict:
             return
 
-        if v not in self.adjDict:
-            self.adjDict[v] = {u}
-        else:
-            self.adjDict[v].add(u)
-        if u not in self.adjDict:
-            self.adjDict[u] = {v}
-        else:
-            self.adjDict[u].add(v)
+        le = len(self.adjDict[v])
+        self.adjDict[v].add(u)
+        self.adjDict[u].add(v)
 
-        # self.edgeCount += 1
+        edgeAdded = len(self.adjDict[v]) != le
+        if edgeAdded:
+            self.edgeCount += 1
 
     def addEdges(self, edges):
         for edge in edges:
-            self.addEdge(edge)
-        # for edge in edges:
-        #     if len(edge) == 2:
-        #         self.addEdge(edge[0], edge[1])
+            self.addEdge(edge[0], edge[1])
 
     def removeEdge(self, v, u):
         if u == v or \
@@ -65,14 +58,10 @@ class Graph:
 
         self.adjDict[v].remove(u)
         self.adjDict[u].remove(v)
-        # self.edgeCount -= 1
+        self.edgeCount -= 1
 
     def getVertexCount(self):
         return len(self.adjDict)
 
     def getEdgeCount(self):
-        # return self.edgeCount
-        """Iterate through the adjacency dictionary
-        and sum the lengths of sets of vertices' neighbours divided by 2
-        """
-        return int(sum([len(i) for _, i in self.adjDict.items()]) / 2)
+        return self.edgeCount

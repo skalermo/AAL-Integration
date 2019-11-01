@@ -17,12 +17,23 @@ def genEdges(n, density):
 
 
 if __name__ == '__main__':
-    """ Print generated edges to stdout
-    :arg argv[1] Vertices count
+    """ Print generated graph to stdout
+    Output example:
+    1
+    2
+    3
+    2 3
+    1 3
+    :arg argv[1] Number of vertices
     :arg argv[2] Density of graph"""
 
-    v = int(argv[1])
-    d = float(argv[2])
-    edges = genEdges(v, d)
+    if len(argv) != 3:
+        print('Incorrect input')
+        exit(1)
+    vertexCount = int(argv[1])
+    density = float(argv[2])
+    edges = genEdges(vertexCount, density)
+    for v in range(vertexCount):
+        print(v)
     for edge in edges:
         print(edge[0], edge[1])
