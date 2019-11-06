@@ -2,15 +2,19 @@ from random import seed, sample
 from sys import argv
 
 
-def genEdges(n, density):
+from Graph import Graph
+
+
+def genEdges(n, d):
     """ Generate edges for graph
     :param n Vertex count in the graph
-    :param density Ratio of number of edges in the graph
-    to the number of edges in a N complete graph
-    Works with number indices for now"""
+    :param d Density - ratio of number of edges in the graph
+        to the number of edges in a N complete graph
+    :return List of edges represented as tuples
+    """
 
     edgeCountComplete = int(n*(n-1)/2)
-    edgeCountToGenerate = int(edgeCountComplete * density)
+    edgeCountToGenerate = int(edgeCountComplete * d)
 
     seed(100)
     return sample([(i, j,) for i in range(n-1) for j in range(i+1, n)], edgeCountToGenerate)
