@@ -65,3 +65,6 @@ class Graph:
 
     def getEdgeCount(self):
         return self.edgeCount
+
+    def connected(self, u, v):
+        return u in self.adjDict[v]
