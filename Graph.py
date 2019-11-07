@@ -5,15 +5,9 @@ class Graph:
         self.adjDict = {}
         self.edgeCount = 0
 
-    def __str__(self):
-        output = ''
-        for k, i in self.adjDict.items():
-            output += '\n' + str(k) + ': ' + str(i)
-        return output
-
     def addVertex(self, v):
         if v not in self.adjDict:
-            self.adjDict[v] = set()
+            self.adjDict[v] = []
 
     def addVertices(self, vertices):
         for v in vertices:
@@ -38,11 +32,14 @@ class Graph:
                 u not in self.adjDict:
             return
 
-        le = len(self.adjDict[v])
-        self.adjDict[v].add(u)
-        self.adjDict[u].add(v)
+        edgeAdded = False
+        if u not in self.adjDict[v]:
+            self.adjDict[v].append(u)
+            edgeAdded = True
+        if v not in self.adjDict[u]:
+            self.adjDict[u].append(v)
+            edgeAdded = True
 
-        edgeAdded = len(self.adjDict[v]) != le
         if edgeAdded:
             self.edgeCount += 1
 
