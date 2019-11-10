@@ -2,9 +2,8 @@ import argparse
 import sys
 
 
-from GraphGen import genEdges
-from Algorithms import bruteForce
-from Parser import parseInput
+from Algorithms import bruteForce, WelshPowell
+from IOHandling import parseInput
 
 
 if __name__ == '__main__':
@@ -17,7 +16,7 @@ if __name__ == '__main__':
     parser_m2.add_argument('-n', type=int, metavar='', help='Number of vertices')
     parser_m2.add_argument('-d', type=float, metavar='', help='Density of the graph')
 
-    parser_m3 = subparsers.add_parser('m3', help='Perform the entire testing process')
+    parser_m3 = subparsers.add_parser('m3', help='Perform the benchmark')
     parser_m3.add_argument('-n', type=int, metavar='', help='Number of vertices')
     parser_m3.add_argument('-d', type=float, metavar='', help='Density of the graph')
     parser_m3.add_argument('-k', type=int, metavar='', help='Problem count')
@@ -29,12 +28,16 @@ if __name__ == '__main__':
 
     # Handle m1 scenario
     if args['command'] == 'm1':
-        graph = parseInput(sys.stdin.readlines())
-        print(bruteForce(graph))
+        graph = parseInput(sys.stdin)
+        print(WelshPowell(graph))
+        # print(bruteForce(graph))
 
     # Handle m2 scenario
     elif args['command'] == 'm2':
         # todo
+        # invertedColorTable = dict()
+        # for key, value in colorTable.items():
+        #     invertedColorTable.setdefault(value, list()).append(key)
         pass
 
     # Handle m3 scenario

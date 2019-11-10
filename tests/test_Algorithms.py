@@ -47,8 +47,8 @@ class TestAlgorithms(unittest.TestCase):
 
     def checkColoring(self, graph, coloring):
         # Check if BruteForce coloring is correct
-        for v in graph.adjDict:
-            for u in graph.adjDict[v]:
+        for v in graph.getAdjDict():
+            for u in graph.getAdjDict()[v]:
                 if coloring[v] == coloring[u]:
                     self.fail("Algorithm failed!")
 
@@ -56,7 +56,7 @@ class TestAlgorithms(unittest.TestCase):
         g = genGraph(5)
         g.addEdges([(0, 1), (1, 2), (1, 3), (3, 4), (1, 4), (0, 2)])
         Algorithms.removeBadVertices(g)
-        self.assertDictEqual(g.adjDict, {
+        self.assertDictEqual(g.getAdjDict(), {
             0: [2],
             2: [0],
             3: [4],
@@ -66,7 +66,7 @@ class TestAlgorithms(unittest.TestCase):
         g = genGraph(5)
         g.addEdges([(0, 1), (1, 2), (1, 3), (2, 3), (3, 4), (1, 4), (0, 2), (0, 3)])
         Algorithms.removeBadVertices(g)
-        self.assertDictEqual(g.adjDict, {
+        self.assertDictEqual(g.getAdjDict(), {
             0: [2],
             2: [0],
             4: []

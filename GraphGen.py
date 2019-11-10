@@ -64,7 +64,7 @@ of the returned graph won't be greater than k
     if p is None and k > 0:
         p = []
         c = n
-        keys = list(g.adjDict.keys())
+        keys = list(g.getAdjDict())
         random.shuffle(keys)
         for i in range(k, 0, -1):
             var = c//i

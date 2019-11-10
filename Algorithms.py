@@ -29,18 +29,18 @@ def bruteForceKcolor(g, k):
     """
 
     solution = {}
-    indexedVertices = {v: k for k, v in dict(enumerate(g.adjDict)).items()}
+    indexedVertices = {v: k for k, v in dict(enumerate(g.getAdjDict())).items()}
     for coloring in product(range(k), repeat=g.getVertexCount()):
         found = True
-        for v in g.adjDict:
-            for u in g.adjDict[v]:
+        for v in g.getAdjDict():
+            for u in g.getAdjDict()[v]:
                 if coloring[indexedVertices[v]] == coloring[indexedVertices[u]]:
                     found = False
                     break
             if not found:
                 break
         if found:
-            solution = {key: val for key, val in zip(g.adjDict, coloring)}
+            solution = {key: val for key, val in zip(g.getAdjDict(), coloring)}
             break
     return solution
 
@@ -49,7 +49,7 @@ def getLargestCliqueSize(g):
     """Return size of the largest clique in the graph g"""
 
     maxSize = [0]
-    calcMaxCliqueSize([], list(g.adjDict.keys()), [], g, maxSize)
+    calcMaxCliqueSize([], list(g.getAdjDict()), [], g, maxSize)
     return maxSize[0]
 
 
@@ -70,10 +70,10 @@ which will contain the result of the algorithm
     pivot = choice(P + X)
 
     for v in P[:]:
-        if v not in g.adjDict[pivot]:
+        if v not in g.getAdjDict()[pivot]:
             R_v = R + [v]
-            P_v = [v1 for v1 in P if v1 in g.adjDict[v]]
-            X_v = [v1 for v1 in X if v1 in g.adjDict[v]]
+            P_v = [v1 for v1 in P if v1 in g.getAdjDict()[v]]
+            X_v = [v1 for v1 in X if v1 in g.getAdjDict()[v]]
             calcMaxCliqueSize(R_v, P_v, X_v, g, maxCliqueSize)
             P.remove(v)
             X.append(v)
@@ -84,14 +84,14 @@ def WelshPowell(graph):
     Implementation of the Welsh Powell algorithm"""
 
     removeBadVertices(graph)
-    orderedVertices = list(collections.OrderedDict(sorted(graph.adjDict.items(),
+    orderedVertices = list(collections.OrderedDict(sorted(graph.getAdjDict().items(),
                                                           key=lambda kv: len(kv[1]), reverse=True)).keys())
 
     coloring = {orderedVertices[0]: 0}
     colorsUsed = 0
     for v in orderedVertices[1:]:
-        available = [True] * len(graph.adjDict)
-        for u in graph.adjDict[v]:
+        available = [True] * len(graph.getAdjDict())
+        for u in graph.getAdjDict()[v]:
             if u in coloring:
                 col = coloring[u]
                 available[col] = False
@@ -108,6 +108,6 @@ def WelshPowell(graph):
 def removeBadVertices(graph):
     """Remove all vertices with degree n-1"""
 
-    for v in list(graph.adjDict):
-        if len(graph.adjDict[v]) == graph.getVertexCount() - 1:
+    for v in list(graph.getAdjDict()):
+        if len(graph.getAdjDict()[v]) == graph.getVertexCount() - 1:
             graph.removeVertex(v)

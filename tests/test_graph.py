@@ -82,7 +82,7 @@ class TestGraph(TestCase):
 
     def test_addEdges(self):
         g = Graph.Graph()
-        g.addVertices(range(0, 5))
+        g.addVertices(range(5))
         edges = [[0, 2], [0, 4], [2, 3], [2, 4], [3, 4]]
         g.addEdges(edges)
         self.assertEqual(g.getEdgeCount(), len(edges))
@@ -96,7 +96,7 @@ class TestGraph(TestCase):
 
     def test_removeEdge(self):
         g = Graph.Graph()
-        g.addVertices(range(0, 5))
+        g.addVertices(range(5))
         g.addEdge(0, 1)
         g.addEdge(1, 2)
         g.addEdge(2, 3)
@@ -118,7 +118,7 @@ class TestGraph(TestCase):
 
     def test_getVertexCount(self):
         g = Graph.Graph()
-        g.addVertices(range(0, 10))
+        g.addVertices(range(10))
         g.addEdge(1, 5)
         g.addEdge(3, 5)
         g.addEdge(2, 4)
@@ -130,7 +130,7 @@ class TestGraph(TestCase):
 
     def test_getEdgeCount(self):
         g = Graph.Graph()
-        g.addVertices(range(0, 7))
+        g.addVertices(range(7))
         g.addEdge(1, 5)
         g.addEdge(3, 5)
         g.addEdge(2, 4)
@@ -142,7 +142,7 @@ class TestGraph(TestCase):
 
     def test_areConnected(self):
         g = Graph.Graph()
-        g.addVertices(range(0, 6))
+        g.addVertices(range(6))
         g.addEdge(2, 5)
         g.addEdge(2, 4)
         g.addEdge(1, 4)
@@ -150,3 +150,13 @@ class TestGraph(TestCase):
         self.assertTrue(g.connected(2, 5))
         self.assertTrue(g.connected(1, 4))
         self.assertFalse(g.connected(1, 3))
+
+    def test_getsetdict(self):
+        g = Graph.Graph()
+        g.addVertices(range(6))
+        g.addEdge(2, 1)
+
+        f = Graph.Graph()
+        f.setdict(g.getdict())
+        self.assertEqual(6, f.getVertexCount())
+        self.assertEqual(1, f.getEdgeCount())

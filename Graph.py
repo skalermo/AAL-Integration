@@ -65,3 +65,13 @@ class Graph:
 
     def connected(self, u, v):
         return u in self.adjDict[v]
+
+    def getAdjDict(self):
+        return self.adjDict
+
+    def getdict(self):
+        return self.__dict__
+
+    def setdict(self, dict):
+        self.__dict__ = dict
+

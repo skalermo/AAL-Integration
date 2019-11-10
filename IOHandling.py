@@ -12,5 +12,5 @@ def parseInput(inputToParse):
 
 
 def dump(g):
-    json.dump(g.__dict__, sys.stdout, indent=4, sort_keys=True)
+    json.dump(g.getdict(), sys.stdout, indent=4, sort_keys=True)
 
