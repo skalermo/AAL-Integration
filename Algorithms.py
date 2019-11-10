@@ -6,10 +6,14 @@ from itertools import product
 from random import choice
 
 
-def bruteForce(graph, start=1):
+def bruteForce(graph, useHeuristics=False):
+    removeBadVertices(graph)
     n = graph.getVertexCount()
     coloring = ()
     colorCount = 0
+    start = 1
+    if useHeuristics:
+        start = getLargestCliqueSize(graph)
     for k in range(start-1, n):
         coloring = bruteForceKcolor(graph, k)
         if coloring:
@@ -24,7 +28,6 @@ def bruteForceKcolor(g, k):
     :param k Number of colors to deal with
     """
 
-    removeBadVertices(g)
     solution = {}
     indexedVertices = {v: k for k, v in dict(enumerate(g.adjDict)).items()}
     for coloring in product(range(k), repeat=g.getVertexCount()):
@@ -37,7 +40,7 @@ def bruteForceKcolor(g, k):
             if not found:
                 break
         if found:
-            solution = {key: val for key, val in zip(g.adjDict.keys(), coloring)}
+            solution = {key: val for key, val in zip(g.adjDict, coloring)}
             break
     return solution
 
@@ -77,30 +80,29 @@ which will contain the result of the algorithm
 
 
 def WelshPowell(graph):
-    """Get coloring of the graph and number of used colors
+    """Get coloring of the graph and number of used colors.
     Implementation of the Welsh Powell algorithm"""
 
     removeBadVertices(graph)
-    notColored = list(collections.OrderedDict(sorted(graph.adjDict.items(),
-                                                     key=lambda kv: len(kv[1]), reverse=True)).keys())
-    lastColor = 0
-    coloring = {}
-    while len(notColored):
-        skippedVertex = False
-        coloring[lastColor] = [notColored[0]]
-        for v in notColored[1:]:
-            for coloredVertex in coloring[lastColor]:
-                if graph.connected(v, coloredVertex):
-                    skippedVertex = True
-                    break
-            if skippedVertex:
-                continue
-            coloring[lastColor].append(v)
+    orderedVertices = list(collections.OrderedDict(sorted(graph.adjDict.items(),
+                                                          key=lambda kv: len(kv[1]), reverse=True)).keys())
 
-        notColored = [x for x in notColored if x not in coloring[lastColor]]
-        lastColor += 1
-
-    return coloring, lastColor
+    coloring = {orderedVertices[0]: 0}
+    colorsUsed = 0
+    for v in orderedVertices[1:]:
+        available = [True] * len(graph.adjDict)
+        for u in graph.adjDict[v]:
+            if u in coloring:
+                col = coloring[u]
+                available[col] = False
+        clr = 0
+        for clr in range(len(available)):
+            if available[clr]:
+                if clr > colorsUsed:
+                    colorsUsed = clr
+                break
+        coloring[v] = clr
+    return coloring, colorsUsed + 1
 
 
 def removeBadVertices(graph):
