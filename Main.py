@@ -2,8 +2,9 @@ import argparse
 import sys
 
 
-from Algorithms import bruteForce, WelshPowell
+from Algorithms import WelshPowell
 from IOHandling import parseInput
+from GraphGen import genGraph
 
 
 if __name__ == '__main__':
@@ -15,11 +16,13 @@ if __name__ == '__main__':
     parser_m2 = subparsers.add_parser('m2', help='Generate instance of the problem and solve it')
     parser_m2.add_argument('-n', type=int, metavar='', help='Number of vertices')
     parser_m2.add_argument('-d', type=float, metavar='', help='Density of the graph')
+    parser_m2.add_argument('-k', type=int, metavar='', help='Make graph k-divisible')
 
     parser_m3 = subparsers.add_parser('m3', help='Perform the benchmark')
     parser_m3.add_argument('-n', type=int, metavar='', help='Number of vertices')
     parser_m3.add_argument('-d', type=float, metavar='', help='Density of the graph')
-    parser_m3.add_argument('-k', type=int, metavar='', help='Problem count')
+    # parser_m2.add_argument('-k', type=int, metavar='', help='Make graph k-divisible')
+    parser_m3.add_argument('-K', type=int, metavar='', help='Problem count')
     parser_m3.add_argument('-s', '-step', type=int, metavar='', help='Generate problems\' sizes with this step')
     parser_m3.add_argument('-r', type=int, metavar='', help='Number of generated instances for each size')
 
@@ -30,15 +33,14 @@ if __name__ == '__main__':
     if args['command'] == 'm1':
         graph = parseInput(sys.stdin)
         print(WelshPowell(graph))
-        # print(bruteForce(graph))
 
     # Handle m2 scenario
     elif args['command'] == 'm2':
-        # todo
-        # invertedColorTable = dict()
-        # for key, value in colorTable.items():
-        #     invertedColorTable.setdefault(value, list()).append(key)
-        pass
+        n = args['n']
+        d = args['d']
+        k = args['k']
+        graph = genGraph(n, d, k)
+        print(WelshPowell(graph))
 
     # Handle m3 scenario
     elif args['command'] == 'm3':

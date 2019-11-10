@@ -19,7 +19,7 @@ def genEdges(n, d):
     edgeCountToGenerate = int(edgeCountComplete * d)
 
     random.seed(None)
-    return random.sample([(i, j,) for i in range(n-1) for j in range(i+1, n)], edgeCountToGenerate)
+    return random.sample([(str(i), str(j),) for i in range(n-1) for j in range(i+1, n)], edgeCountToGenerate)
 
 
 def genGraph(n=0, d=0.0, k=0, p=None, seed=time()):
@@ -40,7 +40,9 @@ of the returned graph won't be greater than k
     if n == 0:
         return g
 
-    g.addVertices(range(n))
+    for v in range(n):
+        g.addVertex(str(v))
+    # g.addVertices(range(n))
 
     # If there are no edges to generate return graph
     if d == 0.0:
@@ -55,7 +57,7 @@ of the returned graph won't be greater than k
         edgeCountToGenerate = int(edgeCountComplete * d)
 
         random.seed(seed)
-        g.addEdges(random.sample([(i, j,) for i in range(n - 1)
+        g.addEdges(random.sample([(str(i), str(j),) for i in range(n - 1)
                                   for j in range(i + 1, n)], edgeCountToGenerate))
         return g
 
@@ -77,7 +79,7 @@ of the returned graph won't be greater than k
     edgeCountToGenerate = int(edgeCountComplete * d)
 
     random.seed(seed)
-    g.addEdges(random.sample([(l, n,) for i in range(len(p)-1)
+    g.addEdges(random.sample([(str(l), str(n),) for i in range(len(p)-1)
                               for j in range(i+1, len(p)) for l in p[i] for n in p[j]], edgeCountToGenerate))
     return g
 

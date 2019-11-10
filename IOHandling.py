@@ -7,7 +7,7 @@ import Graph
 
 def parseInput(inputToParse):
     g = Graph.Graph()
-    g.__dict__ = json.load(inputToParse)
+    g.setdict(json.load(inputToParse))
     return g
 
 
