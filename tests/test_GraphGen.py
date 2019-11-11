@@ -1,4 +1,5 @@
 from unittest import TestCase
+from time import time
 from GraphGen import genEdges, genGraph
 from Algorithms import bruteForce
 
@@ -28,3 +29,11 @@ class TestGraphGen(TestCase):
             chromatic = bruteForce(g, True)[1]
             print(groupsCount, chromatic)
             self.assertTrue(groupsCount >= chromatic)
+
+    def test_seed(self):
+        n = 100
+        density = 0.8
+        seed = time()
+        g = genGraph(n, density, seed=seed)
+        f = genGraph(n, density, seed=seed)
+        self.assertTrue(g == f)

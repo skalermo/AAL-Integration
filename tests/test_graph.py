@@ -160,3 +160,18 @@ class TestGraph(TestCase):
         f.setdict(g.getdict())
         self.assertEqual(6, f.getVertexCount())
         self.assertEqual(1, f.getEdgeCount())
+
+    def test_eq(self):
+        g = Graph.Graph()
+        g.addVertices(range(5))
+        g.addEdge(1, 3)
+        g.addEdge(2, 4)
+
+        f = Graph.Graph()
+        f.addVertices(range(5))
+        f.addEdge(1, 3)
+        f.addEdge(2, 4)
+
+        self.assertTrue(g == f)
+        f.removeVertex(0)
+        self.assertFalse(g == f)
