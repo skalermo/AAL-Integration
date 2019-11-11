@@ -111,3 +111,39 @@ def removeBadVertices(graph):
     for v in list(graph.getAdjDict()):
         if len(graph.getAdjDict()[v]) == graph.getVertexCount() - 1:
             graph.removeVertex(v)
+
+
+def resolveSingleColoredVertices(graph, coloring, colorsUsed):
+    inv_coloring = {}
+    for i in range(colorsUsed):
+        inv_coloring[i] = []
+
+    for k, v in coloring.items():
+        inv_coloring[v].append(k)
+
+    singleColoredVertices = []
+    for color, vertices in inv_coloring.items():
+        if len(vertices) == 1:
+            singleColoredVertices.append(vertices[0])
+
+    if len(singleColoredVertices) == 0:
+        return coloring
+
+    # sort single colored vertices by valence
+    singleColoredVertices.sort(key=lambda x: len(graph.getAdjDict()[x]), reverse=True)
+
+    # find first vertex to pair with single colored
+    for sv in singleColoredVertices:
+        foundPair = False
+        for u in graph.getAdjDict():
+            if u not in graph.getAdjDict()[sv] and sv != u:
+                if len(inv_coloring[coloring[u]]) > 2:
+                    coloring[u] = coloring[sv]
+                    foundPair = True
+                    break
+        if not foundPair:
+            return None
+    return coloring
+
+
+

@@ -81,6 +81,31 @@ class TestAlgorithms(unittest.TestCase):
             4: []
         })
 
+    def test_singleColoredVertices(self):
+        n = 1000
+        d = 0.8
+        k = 100
+        g = genGraph(n, d, k, seed=1)
+        coloring, colorsUsed = Algorithms.WelshPowell(g)
+        print(coloring)
+        print(colorsUsed)
+        # coloringBF, colorsUsedBF = Algorithms.bruteForce(g, True)
+
+        coloring = Algorithms.resolveSingleColoredVertices(g, coloring, colorsUsed)
+        if coloring is None:
+            self.fail()
+
+    def test_singleColoredFail(self):
+        g = Graph.Graph()
+        g.addVertices(range(4))
+        g.addEdge(0, 1)
+        g.addEdge(1, 2)
+        g.addEdge(1, 3)
+        g.addEdge(2, 3)
+        coloring, colorsUsed = Algorithms.bruteForce(g)
+        coloring = Algorithms.resolveSingleColoredVertices(g, coloring, colorsUsed)
+        self.assertTrue(coloring is None)
+
 
 if __name__ == '__main__':
     unittest.main()
