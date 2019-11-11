@@ -30,10 +30,18 @@ class TestGraphGen(TestCase):
             print(groupsCount, chromatic)
             self.assertTrue(groupsCount >= chromatic)
 
-    def test_seed(self):
+    def test_seedTwoGens(self):
         n = 100
         density = 0.8
         seed = time()
         g = genGraph(n, density, seed=seed)
         f = genGraph(n, density, seed=seed)
         self.assertTrue(g == f)
+
+    def test_seed(self):
+        n = 5
+        d = 0.4
+        seed = 3
+        g = genGraph(n, d, seed=seed)
+        self.assertDictEqual({'0': ['4', '3'], '1': [], '2': ['4', '3'], '3': ['0', '2'], '4': ['0', '2']},
+                             g.getAdjDict())
