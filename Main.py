@@ -2,14 +2,15 @@ import argparse
 import sys
 
 
-from Algorithms import WelshPowell
+from Algorithms import bruteForce, WelshPowell, bruteForceWithHeuristics
 from IOHandling import parseInput
 from GraphGen import genGraph
+from Benchmark import testit
 
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(prog='Main.py', description='Program to color a graph')
-    subparsers = parser.add_subparsers(dest='command', help='sub-command help')
+    subparsers = parser.add_subparsers(dest='scenario', help='sub-command help')
 
     parser_m1 = subparsers.add_parser('m1', help='Color graph provided via stdin')
 
@@ -19,10 +20,14 @@ if __name__ == '__main__':
     parser_m2.add_argument('-k', type=int, metavar='', help='Make graph k-divisible')
 
     parser_m3 = subparsers.add_parser('m3', help='Perform the benchmark')
+    parser_m3.add_argument('-w', action='store_true', help='Use Welsh-Powell algorithm')
+    parser_m3.add_argument('-b', action='store_true', help='Use Brute force algorithm')
+    parser_m3.add_argument('-bl', action='store_true', help='Use Brute force algorithm with lower bound estimated')
+
     parser_m3.add_argument('-n', type=int, metavar='', help='Number of vertices')
     parser_m3.add_argument('-d', type=float, metavar='', help='Density of the graph')
-    # parser_m2.add_argument('-k', type=int, metavar='', help='Make graph k-divisible')
-    parser_m3.add_argument('-K', type=int, metavar='', help='Problem count')
+    parser_m3.add_argument('-k', type=int, metavar='', help='Make graph k-divisible')
+    parser_m3.add_argument('-c', type=int, metavar='', help='Problem count')
     parser_m3.add_argument('-s', '-step', type=int, metavar='', help='Generate problems\' sizes with this step')
     parser_m3.add_argument('-r', type=int, metavar='', help='Number of generated instances for each size')
 
@@ -30,22 +35,38 @@ if __name__ == '__main__':
     args = vars(parser.parse_args())
 
     # Handle m1 scenario
-    if args['command'] == 'm1':
+    if args['scenario'] == 'm1':
         graph = parseInput(sys.stdin)
         print(WelshPowell(graph))
 
     # Handle m2 scenario
-    elif args['command'] == 'm2':
-        n = args['n']
-        d = args['d']
-        k = args['k']
-        graph = genGraph(n, d, k)
+    elif args['scenario'] == 'm2':
+        vertexNumber = args['n']
+        density = args['d']
+        divisibility = args['k']
+        graph = genGraph(vertexNumber, density, divisibility)
         print(WelshPowell(graph))
 
     # Handle m3 scenario
-    elif args['command'] == 'm3':
-        # todo
-        pass
+    elif args['scenario'] == 'm3':
+        fun = None
+        if args['w']:
+            fun = WelshPowell
+        elif args['b']:
+            fun = bruteForce
+        elif args['bl']:
+            fun = bruteForceWithHeuristics
+        else:
+            parser_m3.print_help()
+            exit(1)
+
+        vertexNumber = args['n']
+        density = args['d']
+        divisibility = args['k']
+        problemCount = args['c']
+        step = args['s']
+        instanceCount = args['r']
+        testit(fun, (vertexNumber, density, divisibility, problemCount, step, instanceCount))
 
     # Wrong input, print help
     else:
