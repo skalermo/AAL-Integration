@@ -91,7 +91,6 @@ class TestAlgorithms(unittest.TestCase):
         print(colorsUsed)
         # coloringBF, colorsUsedBF = Algorithms.bruteForce(g, True)
 
-        coloring = Algorithms.resolveSingleColoredVertices(g, coloring, colorsUsed)
         if coloring is None:
             self.fail()
 
@@ -103,7 +102,6 @@ class TestAlgorithms(unittest.TestCase):
         g.addEdge(1, 3)
         g.addEdge(2, 3)
         coloring, colorsUsed = Algorithms.bruteForce(g)
-        coloring = Algorithms.resolveSingleColoredVertices(g, coloring, colorsUsed)
         self.assertTrue(coloring is None)
 
 

@@ -19,7 +19,13 @@ def bruteForce(graph, useHeuristics=False):
         if coloring:
             colorCount = k
             break
+
+    coloring = resolveSingleColoredVertices(graph, coloring, colorCount)
     return coloring, colorCount
+
+
+def bruteForceWithHeuristics(graph):
+    return bruteForce(graph, useHeuristics=True)
 
 
 def bruteForceKcolor(g, k):
@@ -102,6 +108,8 @@ def WelshPowell(graph):
                     colorsUsed = clr
                 break
         coloring[v] = clr
+
+    coloring = resolveSingleColoredVertices(graph, coloring, colorsUsed)
     return coloring, colorsUsed + 1
 
 
@@ -115,7 +123,7 @@ def removeBadVertices(graph):
 
 def resolveSingleColoredVertices(graph, coloring, colorsUsed):
     inv_coloring = {}
-    for i in range(colorsUsed):
+    for i in range(colorsUsed+1):
         inv_coloring[i] = []
 
     for k, v in coloring.items():

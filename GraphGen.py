@@ -33,6 +33,9 @@ of the returned graph won't be greater than k
     :return Generated graph
     """
 
+    if not k:
+        k = n
+
     g = Graph()
     rand = random.Random(seed)
 
