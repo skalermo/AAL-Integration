@@ -28,7 +28,8 @@ def outputBenchmarkResults(info, data):
     print("n", "t(n)[ms]", "q(n)", "colors used", sep='|')
     print("---", "---", "---", ":---:", sep='|')
 
+    # row = (vertexCount, avg t(n), q(n), avg colorsUsed)
     for row in data:
-        print(*row, sep='|')
+        print(row[0], str(row[1])[:10], str(row[2])[:10], str(row[3])[:7], sep='|')
     print()
 
