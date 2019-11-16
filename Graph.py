@@ -5,6 +5,12 @@ class Graph:
         self.adjDict = {}
         self.edgeCount = 0
 
+    def __eq__(self, other):
+        if not isinstance(other, Graph):
+            # don't attempt to compare against unrelated types
+            return NotImplemented
+        return self.adjDict == other.getAdjDict() and self.edgeCount == other.getEdgeCount()
+
     def addVertex(self, v):
         if v not in self.adjDict:
             self.adjDict[v] = []

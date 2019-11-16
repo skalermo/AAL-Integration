@@ -18,8 +18,7 @@ def genEdges(n, d):
     edgeCountComplete = int(n*(n-1)/2)
     edgeCountToGenerate = int(edgeCountComplete * d)
 
-    random.seed(None)
-    return random.sample([(i, j,) for i in range(n-1) for j in range(i+1, n)], edgeCountToGenerate)
+    return random.sample([(str(i), str(j),) for i in range(n-1) for j in range(i+1, n)], edgeCountToGenerate)
 
 
 def genGraph(n=0, d=0.0, k=0, p=None, seed=time()):
@@ -34,13 +33,19 @@ of the returned graph won't be greater than k
     :return Generated graph
     """
 
+    if not k:
+        k = n
+
     g = Graph()
+    rand = random.Random(seed)
 
     # If vertex count is 0 just return empty graph
     if n == 0:
         return g
 
-    g.addVertices(range(n))
+    for v in range(n):
+        g.addVertex(str(v))
+    # g.addVertices(range(n))
 
     # If there are no edges to generate return graph
     if d == 0.0:
@@ -54,8 +59,8 @@ of the returned graph won't be greater than k
         edgeCountComplete = int(n * (n - 1) / 2)
         edgeCountToGenerate = int(edgeCountComplete * d)
 
-        random.seed(seed)
-        g.addEdges(random.sample([(i, j,) for i in range(n - 1)
+        rand.seed(seed)
+        g.addEdges(rand.sample([(str(i), str(j),) for i in range(n - 1)
                                   for j in range(i + 1, n)], edgeCountToGenerate))
         return g
 
@@ -65,7 +70,7 @@ of the returned graph won't be greater than k
         p = []
         c = n
         keys = list(g.getAdjDict())
-        random.shuffle(keys)
+        rand.shuffle(keys)
         for i in range(k, 0, -1):
             var = c//i
             group = keys[:var]
@@ -76,8 +81,8 @@ of the returned graph won't be greater than k
 
     edgeCountToGenerate = int(edgeCountComplete * d)
 
-    random.seed(seed)
-    g.addEdges(random.sample([(l, n,) for i in range(len(p)-1)
+    rand.seed(seed)
+    g.addEdges(rand.sample([(str(l), str(n),) for i in range(len(p)-1)
                               for j in range(i+1, len(p)) for l in p[i] for n in p[j]], edgeCountToGenerate))
     return g
 
