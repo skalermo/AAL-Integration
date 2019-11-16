@@ -21,7 +21,7 @@ def genEdges(n, d):
     return random.sample([(str(i), str(j),) for i in range(n-1) for j in range(i+1, n)], edgeCountToGenerate)
 
 
-def genGraph(n=0, d=0.0, k=0, p=None, seed=time()):
+def genGraph(n=0, d=0.0, k=0, p=None, seed=None):
     """ Generate graph random graph based on parameters
     Function guaranties that the chromatic number
 of the returned graph won't be greater than k
@@ -35,6 +35,8 @@ of the returned graph won't be greater than k
 
     if not k:
         k = n
+    if seed is None:
+        seed = time()
 
     g = Graph()
     rand = random.Random(seed)

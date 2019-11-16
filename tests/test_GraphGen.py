@@ -38,6 +38,14 @@ class TestGraphGen(TestCase):
         f = genGraph(n, density, seed=seed)
         self.assertTrue(g == f)
 
+    def test_differentGraphs(self):
+        n = 100
+        density = 0.8
+        k = 5
+        g = genGraph(n, density, k)
+        f = genGraph(n, density, k)
+        self.assertFalse(g == f)
+
     def test_seed(self):
         n = 5
         d = 0.4
