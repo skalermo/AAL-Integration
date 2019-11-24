@@ -63,6 +63,8 @@ wyników pomiarów.
     
     - `-r` *Liczba wygenerowanych instancji* problemu
     
+    - `-f` Zapisywanie tymczasowych wyników pomiarów do pliku .results
+    
     **Przykład**: pomiar czasu dla 30 problemów o wielkościach 
     1000, 1500, 2000 itd. Gęstość generowanych grafów - 0.5. Dla każdej wielkości
     losowanych 10 instancji problemu. Wyniki podać w postaci tabeli.
@@ -118,4 +120,6 @@ bezpośrednio tego pliku dla wygenerowania i zapisania grafu do pliku
 pomocniczych
 
 - `Benchmark.py` odpowiada za przeprowadzenie pomiarów czasu wykonania algorytmów
-i przekazanie wyników do `IOHandling.py` dla dalszego wyświetlenia
+i przekazanie wyników do `IOHandling.py` dla dalszego wyświetlenia. Przy bezpośrednim
+uruchomieniu tego skryptu ładuje dane z pliku .results o ile istnieje, przetwarza i przekazuje je
+dalej jak opisano wyżej.
