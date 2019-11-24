@@ -7,7 +7,7 @@ from random import choice
 
 
 def bruteForce(graph, useHeuristics=False):
-    removeBadVertices(graph)
+    # removeBadVertices(graph)
     n = graph.getVertexCount()
     coloring = ()
     colorCount = 0

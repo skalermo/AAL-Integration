@@ -8,7 +8,7 @@ import Algorithms
 
 class TestAlgorithms(unittest.TestCase):
     def test_WelshPowell(self):
-        n = 10
+        n = 20
         d = 0.8
         g = genGraph(n, d)
         coloring, _ = Algorithms.WelshPowell(g)
@@ -24,16 +24,7 @@ class TestAlgorithms(unittest.TestCase):
         self.assertTrue(k <= colorsUsed)
 
     def test_bruteForce(self):
-        g = Graph.Graph()
-        for i in range(4):
-            g.addVertex(i)
-        g.addEdges([(0, 1), (1, 2), (1, 3), (2, 3)])
-        coloring, colorCount = Algorithms.bruteForce(g)
-        print(coloring)
-        self.checkColoring(g, coloring)
-        self.assertEqual(2, colorCount)
-
-        g = genGraph(10, 0.75)
+        g = genGraph(10, 0.75, 4)
         coloring, _ = Algorithms.bruteForce(g)
         self.checkColoring(g, coloring)
 
