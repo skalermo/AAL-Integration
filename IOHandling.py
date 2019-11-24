@@ -1,5 +1,7 @@
 import json
 import sys
+import io
+import os
 
 
 import Graph
@@ -11,8 +13,29 @@ def parseInput(inputToParse):
     return g
 
 
-def dump(g):
+def dumpGraph(g):
     json.dump(g.getdict(), sys.stdout, indent=4, sort_keys=True)
+
+
+def dumpTmpData(*args):
+    with io.open('.results', 'a') as f:
+        f.write(json.dumps(*args) + '\n')
+
+
+def extractTmpData():
+    filename = '.results'
+    data = []
+    with open(filename, 'r') as f:
+        lines = f.readlines()
+        for line in lines:
+            data.append(json.loads(line))
+        return data
+
+
+def removeTmpFile():
+    filename = '.results'
+    if os.path.isfile(filename):
+        os.remove(filename)
 
 
 def outputBenchmarkResults(info, data):

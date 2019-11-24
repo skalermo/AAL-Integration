@@ -30,6 +30,7 @@ if __name__ == '__main__':
     parser_m3.add_argument('-c', type=int, metavar='', help='Problem count')
     parser_m3.add_argument('-s', '-step', type=int, metavar='', help='Generate problems\' sizes with this step')
     parser_m3.add_argument('-r', type=int, metavar='', help='Number of generated instances for each size')
+    parser_m3.add_argument('-f', action='store_true', default=False, help='Use temporary file to store results')
 
     # Parsing arguments
     args = vars(parser.parse_args())
@@ -66,7 +67,8 @@ if __name__ == '__main__':
         problemCount = args['c']
         step = args['s']
         instanceCount = args['r']
-        testit(fun, (vertexNumber, density, divisibility, problemCount, step, instanceCount))
+        useTmpfile = args['f']
+        testit(fun, (vertexNumber, density, divisibility, problemCount, step, instanceCount, useTmpfile))
 
     # Wrong input, print help
     else:

@@ -114,4 +114,4 @@ if __name__ == '__main__':
     s = args['seed']
     g = genGraph(n, d, k, p, s)
 
-    IOHandling.dump(g)
+    IOHandling.dumpGraph(g)
