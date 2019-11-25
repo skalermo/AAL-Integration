@@ -54,7 +54,7 @@ def testit(f, arguments):
         if useTmpfile:
             dumpTmpData(data[i])
 
-    tmedian, Tmedian = calcMedian(f, data)
+    tmedian, Tmedian = calcMedian(f.__name__, data)
 
     calcQ(f.__name__, data, tmedian, Tmedian)
 
