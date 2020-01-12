@@ -157,7 +157,7 @@ class TestGraph(TestCase):
         g.addEdge(2, 1)
 
         f = Graph.Graph()
-        f.setdict(g.getdict())
+        f.setDict(g.getDict())
         self.assertEqual(6, f.getVertexCount())
         self.assertEqual(1, f.getEdgeCount())
 

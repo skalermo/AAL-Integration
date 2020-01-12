@@ -75,9 +75,9 @@ class Graph:
     def getAdjDict(self):
         return self.adjDict
 
-    def getdict(self):
+    def getDict(self):
         return self.__dict__
 
-    def setdict(self, dict):
+    def setDict(self, dict):
         self.__dict__ = dict
 

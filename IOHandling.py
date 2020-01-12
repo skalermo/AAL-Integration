@@ -9,12 +9,12 @@ import Graph
 
 def parseInput(inputToParse):
     g = Graph.Graph()
-    g.setdict(json.load(inputToParse))
+    g.setDict(json.load(inputToParse))
     return g
 
 
 def dumpGraph(g):
-    json.dump(g.getdict(), sys.stdout, indent=4, sort_keys=True)
+    json.dump(g.getDict(), sys.stdout, indent=4, sort_keys=True)
 
 
 def dumpTmpData(*args):
