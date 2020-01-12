@@ -1,3 +1,5 @@
+
+
 import random
 from time import time
 import argparse
@@ -8,10 +10,13 @@ import IOHandling
 
 
 def genEdges(n, d):
-    """ Generate edges for graph
+    """
+    Generate edges for graph
+
     :param n Vertex count in the graph
     :param d Density - ratio of number of edges in the graph
-        to the number of edges in a N complete graph
+    to the number of edges in a N complete graph
+
     :return List of edges represented as tuples
     """
 
@@ -22,15 +27,16 @@ def genEdges(n, d):
 
 
 def genGraph(n=0, d=0.0, k=0, p=None, seed=None):
-    """ Generate graph random graph based on parameters
+    """
+    Generate graph random graph based on parameters
     Function guaranties that the chromatic number
-of the returned graph won't be greater than k
-    :param n Vertex count in the graph
-    :param d Graph's density
-    :param k Create k-divisible graph if k>0
-    :param p Partitioning of k-divisible graph
-    :param seed For test purposes
-    :return Generated graph
+    of the returned graph won't be greater than k
+    :param n: Vertex count in the graph
+    :param d: Graph's density
+    :param k: Create k-divisible graph if k>0
+    :param p: Partitioning of k-divisible graph
+    :param seed: For test purposes
+    :return: Generated graph
     """
 
     if not k:
@@ -90,7 +96,9 @@ of the returned graph won't be greater than k
 
 
 if __name__ == '__main__':
-    """Dump json-formatted generated graph to stdout"""
+    """
+    Dump json-formatted generated graph to stdout
+    """
 
     parser = argparse.ArgumentParser(prog='GraphGen.py', description='Random graph generator')
     parser.add_argument('-n', type=int, metavar='', help='Number of vertices')

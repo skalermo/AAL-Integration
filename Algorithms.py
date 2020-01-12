@@ -7,6 +7,14 @@ from random import choice
 
 
 def bruteForce(graph, useHeuristics=False):
+    """
+    Brute force header function. Sequentially calls bruteForceKcolor() until coloring is found
+    :param graph: Input graph
+    :param useHeuristics: Use heuristic acceleration or not
+    :return: tuple of dictionary and integer:
+    found coloring: key is a vertex, value is a color
+    numbers of colors used
+    """
     # removeBadVertices(graph)
     n = graph.getVertexCount()
     coloring = ()
@@ -25,13 +33,20 @@ def bruteForce(graph, useHeuristics=False):
 
 
 def bruteForceWithHeuristics(graph):
+    """
+    Ancillary function. Calls bruteForce() with enabled useHeuristics
+    :param graph: Input graph
+    :return: Result of called function bruteForce()
+    """
     return bruteForce(graph, useHeuristics=True)
 
 
 def bruteForceKcolor(g, k):
-    """Check every possible k coloring of the graph g
-    :param g The input graph
-    :param k Number of colors to deal with
+    """
+    Core of brute force algorithm. Checks every possible k-coloring of the graph g
+    :param g: Input graph
+    :param k: Number of colors to deal with
+    :return: Dictionary, found coloring: key is a vertex, value is a color. Empty dictionary if not found
     """
 
     solution = {}
@@ -46,24 +61,35 @@ def bruteForceKcolor(g, k):
             if not found:
                 break
         if found:
+            # match iteratively graph vertices to colors in coloring, store in dictionary
             solution = {key: val for key, val in zip(g.getAdjDict(), coloring)}
             break
     return solution
 
 
 def getLargestCliqueSize(g):
-    """Return size of the largest clique in the graph g"""
+    """
+    Header of the calcMaxCliqueSize() function.
+    Returns size of the largest clique in the graph g
+    :param g: Input graph
+    :return: Size of the largest clique
+    """
 
+    # Use list to be able to modify it by function
     maxSize = [0]
     calcMaxCliqueSize([], list(g.getAdjDict()), [], g, maxSize)
     return maxSize[0]
 
 
 def calcMaxCliqueSize(R, P, X, g, maxCliqueSize):
-    """Modified Bron-Kerbosch algorithm with pivoting
-for finding size of the largest clique
-    :param maxCliqueSize Wrapped in list variable
-which will contain the result of the algorithm
+    """
+    Modified Bron-Kerbosch recursive algorithm with pivoting
+    for finding size of the largest clique.
+    R, P and X are ancillary arrays.
+
+    :param g: Input graph
+    :param maxCliqueSize: Wrapped in list variable
+    which will contain the result of the algorithm
     """
 
     if not any((P, X)):
@@ -86,8 +112,13 @@ which will contain the result of the algorithm
 
 
 def WelshPowell(graph):
-    """Get coloring of the graph and number of used colors.
-    Implementation of the Welsh Powell algorithm"""
+    """
+    Implementation of the Welsh Powell algorithm
+    :param graph: Input graph
+    :return: tuple of dictionary and integer:
+    found coloring: key is a vertex, value is a color
+    numbers of colors used
+    """
 
     removeBadVertices(graph)
     orderedVertices = list(collections.OrderedDict(sorted(graph.getAdjDict().items(),
@@ -114,7 +145,10 @@ def WelshPowell(graph):
 
 
 def removeBadVertices(graph):
-    """Remove all vertices with degree n-1"""
+    """
+    Remove all vertices with degree n-1
+    :param graph: Input graph
+    """
 
     for v in list(graph.getAdjDict()):
         if len(graph.getAdjDict()[v]) == graph.getVertexCount() - 1:
@@ -122,6 +156,13 @@ def removeBadVertices(graph):
 
 
 def resolveSingleColoredVertices(graph, coloring, colorsUsed):
+    """
+    Finds single colored vertices and tries to color them with another used color
+    :param graph: Input graph
+    :param coloring: Found coloring
+    :param colorsUsed: Number of colors used
+    :return: None if failed. Otherwise fixed coloring
+    """
     inv_coloring = {}
     for i in range(colorsUsed+1):
         inv_coloring[i] = []

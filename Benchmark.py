@@ -8,6 +8,13 @@ from IOHandling import outputBenchmarkResults, removeTmpFile, dumpTmpData, extra
 
 
 def timing(f, *args):
+    """
+    Measure execution time of a function
+    :param f: Function which execution time is measured
+    :param args: Function's arguments
+    :return: Tuple of two integers:
+    number of used colors, measured time
+    """
     time1 = time.time()
     _, colorsUsed = f(*args)
     time2 = time.time()
@@ -15,6 +22,13 @@ def timing(f, *args):
 
 
 def testit(f, arguments):
+    """
+    Collect execution times of function f with different parameters, process it
+    and pass it to function outputBenchmarkResults() to print it
+    :param f: Function to test
+    :param arguments: Values defining function f's arguments in each run
+
+    """
 
     vertexNumber, density, divisibility, problemCount, step, instanceCount, useTmpfile = arguments
 
@@ -25,7 +39,7 @@ def testit(f, arguments):
         dumpTmpData((f.__name__, vertexNumber, density, divisibility, problemCount, step, instanceCount))
 
     data = []
-    # data = [[vertexNumber, measuredTime, q(n), colorOveruse], ...]
+    # data = [[vertexNumber, measuredTime, q(n), colorsUsed], ...]
 
     # warming up
     WelshPowell(genGraph(1000, 0.75, 5))
@@ -62,35 +76,42 @@ def testit(f, arguments):
 
 
 def wComplexity(n):
-    """Theoretical complexity of WelshPowell algorithm"""
+    """
+    Theoretical complexity of WelshPowell algorithm
+    :param n: Number of vertices in graph
+    :return: Calculated complexity of the algorithm
+    """
 
     return n**2
 
 
-def bComplexity(n, e):
-    """Theoretical complexity of Brute Force algorithm"""
 
-    sum = 0
-    for i in range(1, n+1):
-        sum += i**n
-    return sum * e
+def blComplexity(n, k, e):
+    """
+    Theoretical complexity of Brute Force algorithm with heuristics
+    :param n: Number of vertices in graph
+    :param s: Found minimal number of colors to use
+    :param e: Number of edges in graph
+    :return: Calculated complexity of the algorithm
+    """
 
-
-def blComplexity(n, s, e):
-    """Theoretical complexity of Brute Force algorithm with heuristics"""
-
-    return s**n*e + 1.44**n
+    return (k**n)*e + 1.44**n
 
 
 def calcMedian(algorithm, data):
+    """
+    Calculate complexity of the algorithm for the median time
+    :param algorithm: WelshPowell or Brute force with heuristics
+    :param data: Data to calculate complexity
+    :return: Tuple of integer and float:
+    time of median, complexity of median
+    """
     median = len(data) // 2
     tmedian = data[median][1]
     Tmedian = 0.0
 
     if algorithm == 'WelshPowell':
         Tmedian = wComplexity(data[median][0])
-    elif algorithm == 'bruteForce':
-        Tmedian = bComplexity(data[median][0], data[median][2])
     elif algorithm == 'bruteForceWithHeuristics':
         Tmedian = blComplexity(data[median][0], data[median][3], data[median][2])
 
@@ -98,12 +119,18 @@ def calcMedian(algorithm, data):
 
 
 def calcQ(algorithm, data, tmedian, Tmedian):
+    """
+    Calculate q value, how much measured time in data is off relatively to median time
+    :param algorithm: WelshPowell or Brute force with heuristics
+    :param data: Data to calculate complexity, the results are stored in it
+    :param tmedian: Time of median
+    :param Tmedian: Calculated complexity of median
+
+    """
     complexity = 0.0
     for row in data:
         if algorithm == 'WelshPowell':
             complexity = wComplexity(row[0])
-        elif algorithm == 'bruteForce':
-            complexity = bComplexity(row[0], row[2])
         elif algorithm == 'bruteForceWithHeuristics':
             complexity = blComplexity(row[0], row[3], row[2])
         q = row[1] * Tmedian / complexity / tmedian
@@ -115,6 +142,9 @@ def calcQ(algorithm, data, tmedian, Tmedian):
 
 
 if __name__ == '__main__':
+    """
+    Use as standalone to process data from temporary file
+    """
     data = extractTmpData()
     info = data[0]
     algorithm = info[0]
