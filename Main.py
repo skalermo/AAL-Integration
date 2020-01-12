@@ -1,3 +1,7 @@
+"""
+Parse and process user input
+"""
+
 import argparse
 import sys
 
@@ -10,14 +14,17 @@ from Benchmark import testit
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(prog='Main.py', description='Program to color a graph')
+    parser.add_argument('-g', action='store_true', help='Draw graph before and after coloring')
     subparsers = parser.add_subparsers(dest='scenario', help='sub-command help')
 
     parser_m1 = subparsers.add_parser('m1', help='Color graph provided via stdin')
+    parser_m1.add_argument('-b', action='store_true', help='Use Brute force algorithm with heuristics')
 
     parser_m2 = subparsers.add_parser('m2', help='Generate instance of the problem and solve it')
     parser_m2.add_argument('-n', type=int, metavar='', help='Number of vertices')
     parser_m2.add_argument('-d', type=float, metavar='', help='Density of the graph')
     parser_m2.add_argument('-k', type=int, metavar='', help='Make graph k-divisible')
+    parser_m2.add_argument('-b', action='store_true', help='Use Brute force algorithm with heuristics')
 
     parser_m3 = subparsers.add_parser('m3', help='Perform the benchmark')
     parser_m3.add_argument('-w', action='store_true', help='Use Welsh-Powell algorithm')
@@ -34,18 +41,38 @@ if __name__ == '__main__':
     # Parsing arguments
     args = vars(parser.parse_args())
 
+    drawUnit = None
+    if args['g']:
+        from DrawUtils import DrawUnit
+        drawUnit = DrawUnit()
+
     # Handle m1 scenario
     if args['scenario'] == 'm1':
         graph = parseInput(sys.stdin)
-        print(WelshPowell(graph))
+        if args['g']:
+            drawUnit.drawGraph(graph)
+        solution = None
+        solution = bruteForceWithHeuristics(graph) if args['b'] else WelshPowell(graph)
+        print(solution)
+        if args['g']:
+            drawUnit.drawGraph(graph, solution)
 
     # Handle m2 scenario
     elif args['scenario'] == 'm2':
+        if args['n'] is None:
+            parser_m2.print_help()
+            exit()
         vertexNumber = args['n']
         density = args['d']
         divisibility = args['k']
         graph = genGraph(vertexNumber, density, divisibility)
-        print(WelshPowell(graph))
+        if args['g']:
+            drawUnit.drawGraph(graph)
+        solution = None
+        solution = bruteForceWithHeuristics(graph) if args['b'] else WelshPowell(graph)
+        print(solution)
+        if args['g']:
+            drawUnit.drawGraph(graph, solution)
 
     # Handle m3 scenario
     elif args['scenario'] == 'm3':
@@ -56,7 +83,7 @@ if __name__ == '__main__':
             fun = bruteForceWithHeuristics
         else:
             parser_m3.print_help()
-            exit(1)
+            exit()
 
         vertexNumber = args['n']
         density = args['d']
@@ -64,8 +91,8 @@ if __name__ == '__main__':
         problemCount = args['c']
         step = args['s']
         instanceCount = args['r']
-        useTmpfile = args['f']
-        testit(fun, (vertexNumber, density, divisibility, problemCount, step, instanceCount, useTmpfile))
+        useTmpFile = args['f']
+        testit(fun, (vertexNumber, density, divisibility, problemCount, step, instanceCount, useTmpFile))
 
     # Wrong input, print help
     else:
