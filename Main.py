@@ -2,7 +2,7 @@ import argparse
 import sys
 
 
-from Algorithms import bruteForce, WelshPowell, bruteForceWithHeuristics
+from Algorithms import WelshPowell, bruteForceWithHeuristics
 from IOHandling import parseInput
 from GraphGen import genGraph
 from Benchmark import testit
@@ -21,8 +21,7 @@ if __name__ == '__main__':
 
     parser_m3 = subparsers.add_parser('m3', help='Perform the benchmark')
     parser_m3.add_argument('-w', action='store_true', help='Use Welsh-Powell algorithm')
-    parser_m3.add_argument('-b', action='store_true', help='Use Brute force algorithm')
-    parser_m3.add_argument('-bl', action='store_true', help='Use Brute force algorithm with lower bound estimated')
+    parser_m3.add_argument('-b', action='store_true', help='Use Brute force algorithm with heuristics')
 
     parser_m3.add_argument('-n', type=int, metavar='', help='Number of vertices')
     parser_m3.add_argument('-d', type=float, metavar='', help='Density of the graph')
@@ -54,8 +53,6 @@ if __name__ == '__main__':
         if args['w']:
             fun = WelshPowell
         elif args['b']:
-            fun = bruteForce
-        elif args['bl']:
             fun = bruteForceWithHeuristics
         else:
             parser_m3.print_help()
