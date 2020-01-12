@@ -13,11 +13,10 @@ def genEdges(n, d):
     """
     Generate edges for graph
 
-    :param n Vertex count in the graph
-    :param d Density - ratio of number of edges in the graph
-    to the number of edges in a N complete graph
+    :param n: Vertex count in the graph
+    :param d: Density - ratio of number of edges in the graph to the number of edges in a N complete graph
 
-    :return List of edges represented as tuples
+    :return: List of edges represented as tuples
     """
 
     edgeCountComplete = int(n*(n-1)/2)
@@ -31,6 +30,7 @@ def genGraph(n=0, d=0.0, k=0, p=None, seed=None):
     Generate graph random graph based on parameters
     Function guaranties that the chromatic number
     of the returned graph won't be greater than k
+
     :param n: Vertex count in the graph
     :param d: Graph's density
     :param k: Create k-divisible graph if k>0

@@ -88,8 +88,8 @@ def calcMaxCliqueSize(R, P, X, g, maxCliqueSize):
     R, P and X are ancillary arrays.
 
     :param g: Input graph
-    :param maxCliqueSize: Wrapped in list variable
-    which will contain the result of the algorithm
+    :param maxCliqueSize: Wrapped in list variable which will contain the result of the algorithm
+
     """
 
     if not any((P, X)):
