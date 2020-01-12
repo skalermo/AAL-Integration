@@ -16,7 +16,7 @@ pracowników.
 ## Tryby wykonania
 
 Program uruchamiany jest za pomocą polecenia `python Main.py` z odpowiednimi
-parametrami jak opisano poniżej:
+parametrami. Dodatkowo za pomocą argumentu `-g` można graficznie przedstawić rozwiązanie.
 
 1. `m1` - Dane dostarczane ze strumienia wejściowego (standardowego lub pliku)
 
@@ -24,6 +24,8 @@ parametrami jak opisano poniżej:
     wyjście:
     
         python Main.py m1 < input.txt
+        
+    Argument `-b` wymusi użycie algorytmu Brute force do znalezienia kolorowania.
 
 2. `m2` - Dane generowane automatycznie (losowo) z możliwością
 parametryzacji generacji określaną przez użytkownika
@@ -43,6 +45,8 @@ parametryzacji generacji określaną przez użytkownika
     - `-s` `--seed` Inicjowanie objektu `Random` podaną wartością. Zapewnia
     wygenerowanie tych samych danych dla powtarzających wartości
     
+    - `-b` Wymuszenie użycia algorytmu Brute force do znalezienia kolorowania.
+    
     **Przykład**: wygenerowanie 3-dzielnego grafu o liczbie wierzchołków rownej 150, 
     gęstości 0.75. Ręczny podział grafu jak i podanie wartości seed jest opcjonalne.
     Wynik dziłania jest przekierowany do pliku output.txt
@@ -53,6 +57,10 @@ parametryzacji generacji określaną przez użytkownika
 wyników pomiarów.
 
     Opis argumentów:
+    
+    - `-w` Użycie algorytmu WelshPowell
+    
+    - `-b` Użycie algorytmu Brute force
     
     - `-n`, `-d`, `-k` podobnie jak dla `m2`
     
@@ -65,11 +73,13 @@ wyników pomiarów.
     
     - `-f` Zapisywanie tymczasowych wyników pomiarów do pliku .results
     
+    Nie jest przewidziane użycie argumentów `-w` i `-b` naraz.
+    
     **Przykład**: pomiar czasu dla 30 problemów o wielkościach 
     1000, 1500, 2000 itd. Gęstość generowanych grafów - 0.5. Dla każdej wielkości
     losowanych 10 instancji problemu. Wyniki podać w postaci tabeli.
     
-        python Main m3 -n 1000 -d 0.5 -c 30 -s 500 -r 10 > table.md
+        python Main m3 -w -n 1000 -d 0.5 -c 30 -s 500 -r 10 > table.md
     
     **Uwaga**: wynik jest sformatowany dla wyświetlania w postaci `.md` (markdown)
     
@@ -123,3 +133,6 @@ pomocniczych
 i przekazanie wyników do `IOHandling.py` dla dalszego wyświetlenia. Przy bezpośrednim
 uruchomieniu tego skryptu ładuje dane z pliku .results o ile istnieje, przetwarza i przekazuje je
 dalej jak opisano wyżej.
+
+- `DrawUtils.py` umożliwia rysowanie grafu i rozwiązania. Wymaga spełnienia zależności opisanych
+w pliku `requirements.txt`.
