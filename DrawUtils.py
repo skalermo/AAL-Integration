@@ -16,8 +16,10 @@ class DrawUnit:
     def drawGraph(self, graph, solution=None):
         """
         Draw 2 graphs: before and after coloring. Function also saves images
+
         :param graph: Input graph
         :param solution: The coloring of the graph
+
         """
         colors = mcolors.BASE_COLORS
         with catch_warnings():
