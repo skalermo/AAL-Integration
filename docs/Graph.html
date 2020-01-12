@@ -1,0 +1,205 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>Graph module &#8212; AAL-Integration  documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="GraphGen module" href="GraphGen.html" />
+    <link rel="prev" title="DrawUtils module" href="DrawUtils.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="module-Graph">
+<span id="graph-module"></span><h1>Graph module<a class="headerlink" href="#module-Graph" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="Graph.Graph">
+<em class="property">class </em><code class="sig-prename descclassname">Graph.</code><code class="sig-name descname">Graph</code><a class="headerlink" href="#Graph.Graph" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Graph implementation based on dictionary of sets</p>
+<dl class="method">
+<dt id="Graph.Graph.addEdge">
+<code class="sig-name descname">addEdge</code><span class="sig-paren">(</span><em class="sig-param">u</em>, <em class="sig-param">v</em><span class="sig-paren">)</span><a class="headerlink" href="#Graph.Graph.addEdge" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add edge between u and v vertices
+Do nothing if vertices are the same
+or if at least one of them doesn’t belong to the graph</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="Graph.Graph.addEdges">
+<code class="sig-name descname">addEdges</code><span class="sig-paren">(</span><em class="sig-param">edges</em><span class="sig-paren">)</span><a class="headerlink" href="#Graph.Graph.addEdges" title="Permalink to this definition">¶</a></dt>
+<dd><p>Iteratively add edges from the input list
+:param edges: Input list of edges</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="Graph.Graph.addVertex">
+<code class="sig-name descname">addVertex</code><span class="sig-paren">(</span><em class="sig-param">v</em><span class="sig-paren">)</span><a class="headerlink" href="#Graph.Graph.addVertex" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add vertex v to graph, if not already added
+:param v: Vertex to add</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="Graph.Graph.addVertices">
+<code class="sig-name descname">addVertices</code><span class="sig-paren">(</span><em class="sig-param">vertices</em><span class="sig-paren">)</span><a class="headerlink" href="#Graph.Graph.addVertices" title="Permalink to this definition">¶</a></dt>
+<dd><p>Iteratively add vertices from the input list
+:param vertices: Input list of vertices</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="Graph.Graph.connected">
+<code class="sig-name descname">connected</code><span class="sig-paren">(</span><em class="sig-param">u</em>, <em class="sig-param">v</em><span class="sig-paren">)</span><a class="headerlink" href="#Graph.Graph.connected" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if the edge between vertices u and v exists</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="Graph.Graph.getAdjDict">
+<code class="sig-name descname">getAdjDict</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Graph.Graph.getAdjDict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get dictionary containing vertices</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="Graph.Graph.getDict">
+<code class="sig-name descname">getDict</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Graph.Graph.getDict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get object’s values</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="Graph.Graph.getEdgeCount">
+<code class="sig-name descname">getEdgeCount</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Graph.Graph.getEdgeCount" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="Graph.Graph.getVertexCount">
+<code class="sig-name descname">getVertexCount</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Graph.Graph.getVertexCount" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="Graph.Graph.removeEdge">
+<code class="sig-name descname">removeEdge</code><span class="sig-paren">(</span><em class="sig-param">v</em>, <em class="sig-param">u</em><span class="sig-paren">)</span><a class="headerlink" href="#Graph.Graph.removeEdge" title="Permalink to this definition">¶</a></dt>
+<dd><p>Remove edge between u and v vertices
+Do nothing if vertices are the same
+or if at least one of them doesn’t belong to the graph</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="Graph.Graph.removeVertex">
+<code class="sig-name descname">removeVertex</code><span class="sig-paren">(</span><em class="sig-param">v</em><span class="sig-paren">)</span><a class="headerlink" href="#Graph.Graph.removeVertex" title="Permalink to this definition">¶</a></dt>
+<dd><p>Remove vertex from graph. Decrease number of edges
+:param v: Vertex to remove</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="Graph.Graph.setDict">
+<code class="sig-name descname">setDict</code><span class="sig-paren">(</span><em class="sig-param">dict</em><span class="sig-paren">)</span><a class="headerlink" href="#Graph.Graph.setDict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set object’s values
+:param dict: Assign object’s values to the new ones from dict</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">AAL-Integration</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">AAL-Integration</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="Algorithms.html">Algorithms module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Benchmark.html">Benchmark module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="DrawUtils.html">DrawUtils module</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Graph module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="GraphGen.html">GraphGen module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="IOHandling.html">IOHandling module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Main.html">Main module</a></li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  <li><a href="modules.html">AAL-Integration</a><ul>
+      <li>Previous: <a href="DrawUtils.html" title="previous chapter">DrawUtils module</a></li>
+      <li>Next: <a href="GraphGen.html" title="next chapter">GraphGen module</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, Roman Moskalenko.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.3.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/Graph.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

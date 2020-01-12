@@ -1,0 +1,7 @@
+DrawUtils module
+================
+
+.. automodule:: DrawUtils
+   :members:
+   :undoc-members:
+   :show-inheritance:

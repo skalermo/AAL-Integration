@@ -1,0 +1,7 @@
+Algorithms module
+=================
+
+.. automodule:: Algorithms
+   :members:
+   :undoc-members:
+   :show-inheritance:

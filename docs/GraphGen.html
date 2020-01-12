@@ -1,0 +1,158 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>GraphGen module &#8212; AAL-Integration  documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="IOHandling module" href="IOHandling.html" />
+    <link rel="prev" title="Graph module" href="Graph.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="module-GraphGen">
+<span id="graphgen-module"></span><h1>GraphGen module<a class="headerlink" href="#module-GraphGen" title="Permalink to this headline">¶</a></h1>
+<dl class="function">
+<dt id="GraphGen.genEdges">
+<code class="sig-prename descclassname">GraphGen.</code><code class="sig-name descname">genEdges</code><span class="sig-paren">(</span><em class="sig-param">n</em>, <em class="sig-param">d</em><span class="sig-paren">)</span><a class="headerlink" href="#GraphGen.genEdges" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate edges for graph</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>n</strong> – Vertex count in the graph</p></li>
+<li><p><strong>d</strong> – Density - ratio of number of edges in the graph to the number of edges in a N complete graph</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>List of edges represented as tuples</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="GraphGen.genGraph">
+<code class="sig-prename descclassname">GraphGen.</code><code class="sig-name descname">genGraph</code><span class="sig-paren">(</span><em class="sig-param">n=0</em>, <em class="sig-param">d=0.0</em>, <em class="sig-param">k=0</em>, <em class="sig-param">p=None</em>, <em class="sig-param">seed=None</em><span class="sig-paren">)</span><a class="headerlink" href="#GraphGen.genGraph" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate graph random graph based on parameters
+Function guaranties that the chromatic number
+of the returned graph won’t be greater than k</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>n</strong> – Vertex count in the graph</p></li>
+<li><p><strong>d</strong> – Graph’s density</p></li>
+<li><p><strong>k</strong> – Create k-divisible graph if k&gt;0</p></li>
+<li><p><strong>p</strong> – Partitioning of k-divisible graph</p></li>
+<li><p><strong>seed</strong> – For test purposes</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Generated graph</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">AAL-Integration</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">AAL-Integration</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="Algorithms.html">Algorithms module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Benchmark.html">Benchmark module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="DrawUtils.html">DrawUtils module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Graph.html">Graph module</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">GraphGen module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="IOHandling.html">IOHandling module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Main.html">Main module</a></li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  <li><a href="modules.html">AAL-Integration</a><ul>
+      <li>Previous: <a href="Graph.html" title="previous chapter">Graph module</a></li>
+      <li>Next: <a href="IOHandling.html" title="next chapter">IOHandling module</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, Roman Moskalenko.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.3.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/GraphGen.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
