@@ -7,7 +7,7 @@ import os
 import Graph
 
 
-def parseInput(inputToParse):
+def parseJsonInput(inputToParse):
     """
     Parse json-formatted input
     :param inputToParse: standard input
@@ -15,6 +15,34 @@ def parseInput(inputToParse):
     """
     g = Graph.Graph()
     g.setDict(json.load(inputToParse))
+    return g
+
+
+def parseSimpleNotationInput(inputToParse):
+    """
+    Parse graph in simple notation.
+    Example:
+    12 // number of vertices
+    1 2 // pairs of vertices to add as edges to graph
+    3 4
+    3 6
+    :param inputToParse: standard input
+    :return: Generated graph
+    """
+
+    words = inputToParse.read().split()
+    g = Graph.Graph()
+
+    if len(words) % 2 == 0:
+        raise Exception
+
+    for i in range(int(words[0])):
+        g.addVertex(str(i))
+
+    for i in range(len(words)//2):
+        u = words[2*i+1]
+        v = words[2*i+2]
+        g.addEdge(u, v)
     return g
 
 
