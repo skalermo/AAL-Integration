@@ -26,8 +26,10 @@ def parseSimpleNotationInput(inputToParse):
     1 2 // pairs of vertices to add as edges to graph
     3 4
     3 6
+
     :param inputToParse: standard input
     :return: Generated graph
+
     """
 
     words = inputToParse.read().split()
