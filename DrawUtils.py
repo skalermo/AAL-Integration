@@ -53,7 +53,7 @@ class DrawUnit:
                     inv_coloring[v].append(k)
 
                 for subset, color in zip(inv_coloring.items(), colors):
-                    nx.draw_networkx_nodes(G, self.pos, subset[1], node_color=color, width=4)
+                    nx.draw_networkx_nodes(G, self.pos, subset[1], node_color=color, width=4, node_size=700)
 
                 plt.savefig("Graph_after_coloring")
                 plt.show()
