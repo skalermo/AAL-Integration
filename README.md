@@ -20,12 +20,18 @@ parametrami. Dodatkowo za pomocą argumentu `-g` można graficznie przedstawić 
 
 1. `m1` - Dane dostarczane ze strumienia wejściowego (standardowego lub pliku)
 
+    Opis argumentów:
+    
+    - `-b` Wymuszenie użycia algorytmu Brute force do znalezienia kolorowania
+    
+    - `-i` Standardowe wejście interpretowane nie jako format .json, tylko uproszczona
+    forma tekstowa
+
     **Przykład**: wczytanie grafu z pliku *input.txt* i wypisanie wyników na standardowe
     wyjście:
     
         python Main.py m1 < input.txt
-        
-    Argument `-b` wymusi użycie algorytmu Brute force do znalezienia kolorowania.
+
 
 2. `m2` - Dane generowane automatycznie (losowo) z możliwością
 parametryzacji generacji określaną przez użytkownika
@@ -116,18 +122,19 @@ Wyniki pomiarów czasu wykonania są podawane na standardowym wyjściu w postaci
 ## "Przewodnik" po plikach źródłowych
 
 - `Main.py` odpowiada za parsowanie argumentów i przyjmowanie danych wejściowych
-oraz wypisywanie wyników
+oraz wypisywanie wyników.
 
 - `IOHandling.py` zawiera funkcje do odczytywania i zapisywania plików .json
-oraz wypisuje wyniki pomiarów czasowych
+oraz wypisuje wyniki pomiarów czasowych. Także ma możliwość do odczytu grafów z
+uproszczonego zapisu.
 
-- `Graph.py` zawiera implementacje klasy grafu
+- `Graph.py` zawiera implementacje klasy grafu.
 
 - `GraphGen.py` generuje grafy o zadanych parametrach. Jest możliwość uruchomienia
-bezpośrednio tego pliku dla wygenerowania i zapisania grafu do pliku
+bezpośrednio tego pliku dla wygenerowania i zapisania grafu do pliku.
 
 - `Algorithms.py` zawiera implementacje wspomnianych wyżej algorytmów, oraz funkcji
-pomocniczych
+pomocniczych.
 
 - `Benchmark.py` odpowiada za przeprowadzenie pomiarów czasu wykonania algorytmów
 i przekazanie wyników do `IOHandling.py` dla dalszego wyświetlenia. Przy bezpośrednim

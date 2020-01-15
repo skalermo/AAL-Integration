@@ -64,11 +64,30 @@
 </dd></dl>
 
 <dl class="function">
-<dt id="IOHandling.parseInput">
-<code class="sig-prename descclassname">IOHandling.</code><code class="sig-name descname">parseInput</code><span class="sig-paren">(</span><em class="sig-param">inputToParse</em><span class="sig-paren">)</span><a class="headerlink" href="#IOHandling.parseInput" title="Permalink to this definition">¶</a></dt>
+<dt id="IOHandling.parseJsonInput">
+<code class="sig-prename descclassname">IOHandling.</code><code class="sig-name descname">parseJsonInput</code><span class="sig-paren">(</span><em class="sig-param">inputToParse</em><span class="sig-paren">)</span><a class="headerlink" href="#IOHandling.parseJsonInput" title="Permalink to this definition">¶</a></dt>
 <dd><p>Parse json-formatted input
 :param inputToParse: standard input
 :return: Generated graph</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="IOHandling.parseSimpleNotationInput">
+<code class="sig-prename descclassname">IOHandling.</code><code class="sig-name descname">parseSimpleNotationInput</code><span class="sig-paren">(</span><em class="sig-param">inputToParse</em><span class="sig-paren">)</span><a class="headerlink" href="#IOHandling.parseSimpleNotationInput" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parse graph in simple notation.
+Example:
+12 // number of vertices
+1 2 // pairs of vertices to add as edges to graph
+3 4
+3 6</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>inputToParse</strong> – standard input</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Generated graph</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="function">

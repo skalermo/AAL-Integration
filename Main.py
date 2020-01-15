@@ -7,7 +7,7 @@ import sys
 
 
 from Algorithms import WelshPowell, bruteForceWithHeuristics
-from IOHandling import parseInput
+from IOHandling import parseJsonInput, parseSimpleNotationInput
 from GraphGen import genGraph
 from Benchmark import testit
 
@@ -19,6 +19,7 @@ if __name__ == '__main__':
 
     parser_m1 = subparsers.add_parser('m1', help='Color graph provided via stdin')
     parser_m1.add_argument('-b', action='store_true', help='Use Brute force algorithm with heuristics')
+    parser_m1.add_argument('-i', action='store_true', help='For simple graph notation usage')
 
     parser_m2 = subparsers.add_parser('m2', help='Generate instance of the problem and solve it')
     parser_m2.add_argument('-n', type=int, metavar='', help='Number of vertices')
@@ -48,7 +49,7 @@ if __name__ == '__main__':
 
     # Handle m1 scenario
     if args['scenario'] == 'm1':
-        graph = parseInput(sys.stdin)
+        graph = parseSimpleNotationInput(sys.stdin) if args['i'] else parseJsonInput(sys.stdin)
         if args['g']:
             drawUnit.drawGraph(graph)
         solution = None
