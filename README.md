@@ -1,6 +1,14 @@
 # AAL-Integration
+Roman Moskalenko
 
-Roman Moskalenko, 295136
+Input graph | Colored graph
+:---:|:---:
+![graph](img/Graph_before_coloring.png) |![graph_colored](img/Graph_after_coloring.png)
+
+Obrazki powyżej wygenerowane za pomocą:
+```console
+$ python Main.py -g m2 -n 20 -d 0.2 -k 4
+```
 
 ## Treść polecenia
 
